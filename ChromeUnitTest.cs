@@ -11,27 +11,30 @@ using OpenQA.Selenium.Firefox;
 using AmazonProj;
 namespace AmazonProj
 {
-    public class UnitTest2
+    public class ChromeUnitTest
     {
         public static IWebDriver driver;
+        Dictionary<string,string> filter;
+        Amazon Amazon;
         [SetUp]
         public void startBrowser()
         {
-            ChromeOptions options = new ChromeOptions();
-           // FirefoxOptions options = new FirefoxOptions();
-            options.AddArgument("start-maximized");
-            driver = new ChromeDriver("C:\\Drivers\\Chrome\\", options);
-           // driver = new FirefoxDriver("C:\\Drivers\\Firefox\\");
+            driver = BrowserFactory.GetDriver("chrome",new List<string> {});
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            filter = new Dictionary<string, string>();
+            filter["price lower then"] = "100";
+            filter["price higher or equal"] = "50";
+            filter["free shipping"] = "true";
         }
         [Test]
-         public void test()
-         {
+        public void test()
+        {
           driver.Navigate().GoToUrl("https://www.amazon.com");
-          Amazon Amazon = new Amazon(new ChromeDriver());
-          Amazon.Pages.Home.SearchBar.Text="mouse";
+          Amazon = new Amazon(driver);
+          Amazon.Pages.Home.SearchBar.Text= "mouse";
           Amazon.Pages.Home.SearchBar.Click();
-         //Amazon.Pages.Results.GetResultsBy();
+          Amazon.Pages.Results.GetResultsBy(filter);
+          Assert.Pass();
         }
         [TearDown]
         public void closeBrowser()

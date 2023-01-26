@@ -11,12 +11,12 @@ namespace AmazonProj
     {
         private string title;
         private string price;
-        private string shipping;
-        public Item(string title, string price, string shipping)
+        private string url;
+        public Item(string title, string price, string url)
         {
             this.title = title;
             this.price = price;
-            this.shipping = shipping;
+            this.url = url;
         }
         public string Title{
             get { return title; }
@@ -27,10 +27,14 @@ namespace AmazonProj
             get { return price; }
             set { price = value; }
         }
-        public string Shipping
+        public string Url
         {
-            get { return shipping; }
-            set { shipping = value; }
+            get { return url; }
+            set { url = value; }
+        }
+        public string toString()
+        {
+            return title + " " + price + " " + url;
         }
     }
 }

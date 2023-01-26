@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using AmazonProj;
 using System.Xml.Linq;
-
 namespace AmazonProj
 {
     public class SearchBar
@@ -20,24 +19,18 @@ namespace AmazonProj
         {
             get
             {
-                //implemenet return text from search bar
-                //  element = this.driver.FindElement();
-                // return element.Text;
-                var SearchBar = UnitTest2.driver.FindElement(By.Id("twotabsearchtextbox"));
+                var SearchBar = driver.FindElement(By.Id("twotabsearchtextbox"));
                 return SearchBar.Text;
             }
             set
             {
-                //implement Set text into text bar
-               // element = this.driver.FindElement();
-              //  element.type(value)
-                var SearchBar = UnitTest2.driver.FindElement(By.Id("twotabsearchtextbox"));
+                var SearchBar = driver.FindElement(By.Id("twotabsearchtextbox"));
                 SearchBar.SendKeys(value);
             }
         }
         public void Click()
         {
-            var SearchBar = UnitTest2.driver.FindElement(By.Id("nav-search-submit-button"));
+            var SearchBar = driver.FindElement(By.Id("nav-search-submit-button"));
             SearchBar.Click();
         }
     }
